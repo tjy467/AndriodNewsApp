@@ -7,20 +7,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tjy.newsapp.components.news.News;
 
-public class NewsRecyclerView extends RecyclerView implements NewsProvider.OnNewsInsertListener {
-    NewsProvider newsProvider;
+import java.util.List;
+
+// 展示新闻
+public class NewsRecyclerView extends RecyclerView implements NewsProviderHandler.OnNewsUpdateListener {
 
     public NewsRecyclerView(@NonNull Context context) {
         super(context);
     }
 
-    public NewsRecyclerView setNewsProvider(NewsProvider newsProvider) {
-        this.newsProvider = newsProvider;
-        return this;
+    public void setNewsProvider() {
+
     }
 
     @Override
-    public void onNewsInsert(News news) {
+    public void onNewsUpdate(List<News> news) {
 
     }
 }

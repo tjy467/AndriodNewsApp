@@ -43,7 +43,8 @@ public class NewsCrawler {
                     .setPublisher(news.getString("publisher"))
                     .setContent(news.getString("content"))
                     .setImage(news.getString("image"))
-                    .setVideo(news.getString("video")));
+                    .setVideo(news.getString("video"))
+                    .setNewsID(news.getString("newsID")));
         }
         return result;
     }
