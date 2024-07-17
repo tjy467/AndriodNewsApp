@@ -28,7 +28,8 @@ public class Image {
             if(url.isEmpty()) this.url = null;
             else this.url = new URL(url);
         } catch(MalformedURLException e) {
-            Log.e("Image Loader", "Failed to parse the url:" + urls + "what the heck");
+            this.url = null;
+            Log.e("Image Loader", "Failed to parse the url:" + urls);
         }
     }
 }

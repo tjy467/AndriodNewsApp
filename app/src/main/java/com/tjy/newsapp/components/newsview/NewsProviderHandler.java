@@ -27,6 +27,7 @@ public class NewsProviderHandler extends Handler {
     }
 
     private final int ADD_ON_NEWS_UPDATE_LISTENER = 1;
+    private final int GET_LATEST_NEWS = 2;
 
     @Override
     public void handleMessage(Message message) {
@@ -34,14 +35,25 @@ public class NewsProviderHandler extends Handler {
             case ADD_ON_NEWS_UPDATE_LISTENER:
                 NewsProviderImpl.addOnNewsUpdateListener((OnNewsUpdateListener) message.obj);
                 break;
+            case GET_LATEST_NEWS:
+                NewsProviderImpl.getLatestNews();
+                break;
         }
     }
 
+    public enum UpdateType {
+        FRONT, BACK
+    }
+
     public interface OnNewsUpdateListener {
-        void onNewsUpdate(List<News> news);
+        void onNewsUpdate(List<News> newsList, UpdateType type);
     }
 
     public void addOnNewsUpdateListener(OnNewsUpdateListener listener) {
         sendMessage(obtainMessage(ADD_ON_NEWS_UPDATE_LISTENER, listener));
+    }
+
+    public void getLatestNews() {
+        sendEmptyMessage(GET_LATEST_NEWS);
     }
 }

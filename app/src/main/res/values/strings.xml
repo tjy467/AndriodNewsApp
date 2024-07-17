@@ -4,7 +4,5 @@
     <string name="menu_news">news</string>
     <string name="menu_categories">categories</string>
     <string name="menu_mine">mine</string>
-    <string name="title_activity_news">NewsActivity</string>
-    <string name="title_activity_categories">CategoriesActivity</string>
-    <string name="title_activity_mine">MineActivity</string>
+    <string name="error_web">Failed to crawl news.</string>
 </resources>

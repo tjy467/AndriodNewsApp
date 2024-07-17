@@ -20,7 +20,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 // 抓取新闻
 public class NewsCrawler {
-    private static final int PAGE_SIZE = 15;
+    public static final int PAGE_SIZE = 15;
     private static final String QUERY_URL = "https://api2.newsminer.net/svc/news/queryNewsList";
 
     // 从网页返回的 json 文件中提取新闻内容
@@ -63,6 +63,7 @@ public class NewsCrawler {
                     + "&words="
                     + "&categories="
                     + "&page=" + page;
+            Log.i("NewsCrawler", "crawling:" + completeUrl);
             url = new URL(completeUrl);
         } catch (MalformedURLException ignored) {}
         assert url != null;
@@ -83,13 +84,7 @@ public class NewsCrawler {
     }
 
     // 拉取时间区间内的新闻
-    public static ArrayList<News> crawl(Date startDate, Date endDate) throws IOException {
-        ArrayList<News> result = new ArrayList<>();
-        for(int page = 1;; page++) {
-            ArrayList<News> list = crawl(startDate, endDate, page);
-            result.addAll(list);
-            if(list.size() < PAGE_SIZE) break;
-        }
-        return result;
+    public static ContinuingCrawling crawl(Date startDate, Date endDate) {
+        return new ContinuingCrawling(startDate, endDate);
     }
 }

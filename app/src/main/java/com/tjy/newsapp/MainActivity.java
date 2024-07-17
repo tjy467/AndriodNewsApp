@@ -10,8 +10,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.tjy.newsapp.components.news.News;
 import com.tjy.newsapp.components.newsview.NewsProviderHandler;
 
-import java.util.List;
-
 public class MainActivity extends FragmentActivity implements BottomNavigationView.OnItemSelectedListener {
     private Fragment newsFragment, categoriesFragment, mineFragment, currentFragment;
     private FragmentManager manager;

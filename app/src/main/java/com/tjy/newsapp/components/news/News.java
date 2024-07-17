@@ -21,6 +21,11 @@ public class News {
 
     public News() {}
 
+    @Override
+    public int hashCode() {
+        return newsID.hashCode();
+    }
+
     public String getTitle() {
         return title;
     }

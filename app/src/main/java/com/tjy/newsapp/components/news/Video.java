@@ -8,11 +8,27 @@ import java.net.URL;
 public class Video {
     private URL url;
 
-    public Video(String url) {
+    private static String extractUrl(String urls) {
+        urls = urls.trim();
+//        if(urls.startsWith("[") && urls.endsWith("]")) {
+//            urls = urls.substring(1, urls.length() - 1);
+//        }
+//        String[] strings = urls.split(",");
+//        for(String url: strings) {
+//            if(url.isBlank()) continue;
+//            return url.trim();
+//        }
+        return "";
+    }
+
+    public Video(String urls) {
+        String url = extractUrl(urls);
         try {
-            this.url = new URL(url);
+            if(url.isEmpty()) this.url = null;
+            else this.url = new URL(url);
         } catch(MalformedURLException e) {
-            Log.e("IMAGE", "Failed to parse the url:" + url);
+            this.url = null;
+            Log.e("Video loader", "Failed to parse the url:" + url);
         }
     }
 }
