@@ -30,6 +30,7 @@ public class MainActivity extends FragmentActivity implements BottomNavigationVi
     }
 
     // 切换菜单的回调函数
+    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         CharSequence title = item.getTitle();
         assert title != null;

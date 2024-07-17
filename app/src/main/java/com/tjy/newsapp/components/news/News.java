@@ -17,6 +17,7 @@ public class News {
     private String organization;
     private String publisher;
     private String category;
+    private String newsID;
 
     public News() {}
 
@@ -94,6 +95,15 @@ public class News {
 
     public News setCategory(String category) {
         this.category = category;
+        return this;
+    }
+
+    public String getNewsID() {
+        return newsID;
+    }
+
+    public News setNewsID(String newsID) {
+        this.newsID = newsID;
         return this;
     }
 }

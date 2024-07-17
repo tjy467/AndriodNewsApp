@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+// "分类"菜单
 public class CategoriesFragment extends Fragment {
 
     @Override

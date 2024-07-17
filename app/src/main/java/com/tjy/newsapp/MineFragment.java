@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+// "我的"菜单
 public class MineFragment extends Fragment {
 
     @Override
