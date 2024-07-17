@@ -1,7 +1,6 @@
 package com.tjy.newsapp.components.newsview;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +18,11 @@ import java.util.ArrayList;
 
 // 滚动展示新闻
 public class NewsRecyclerView extends RecyclerView {
-    protected ArrayList<News> newsList;
-    protected NewsItemAdapter adapter;
+    public ArrayList<News> newsList;
+    public NewsItemAdapter adapter;
 
-    public NewsRecyclerView(@NonNull Context context, AttributeSet attributeSet) {
-        super(context, attributeSet);
+    public NewsRecyclerView(@NonNull Context context) {
+        super(context);
         newsList = new ArrayList<>();
         adapter = new NewsItemAdapter();
         setAdapter(adapter);
@@ -32,7 +31,7 @@ public class NewsRecyclerView extends RecyclerView {
     }
 
     @SuppressWarnings("all")
-    protected class NewsViewHolder extends RecyclerView.ViewHolder {
+    public class NewsViewHolder extends RecyclerView.ViewHolder {
         public TextView textTitle;
 
         public NewsViewHolder(@NonNull View itemView) {
@@ -41,7 +40,7 @@ public class NewsRecyclerView extends RecyclerView {
         }
     }
 
-    protected class NewsItemAdapter extends RecyclerView.Adapter<NewsViewHolder> {
+    public class NewsItemAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
         @NonNull
         @Override

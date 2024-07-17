@@ -41,12 +41,8 @@ public class NewsProviderHandler extends Handler {
         }
     }
 
-    public enum UpdateType {
-        FRONT, BACK
-    }
-
     public interface OnNewsUpdateListener {
-        void onNewsUpdate(List<News> newsList, UpdateType type);
+        void onNewsUpdate(List<News> newsList);
     }
 
     public void addOnNewsUpdateListener(OnNewsUpdateListener listener) {

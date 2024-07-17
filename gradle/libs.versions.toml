@@ -10,6 +10,7 @@ kotlin = "1.9.0"
 lifecycleRuntimeKtx = "2.8.3"
 activityCompose = "1.9.0"
 composeBom = "2024.04.01"
+refreshLayoutKernel = "2.1.0"
 
 [libraries]
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
@@ -21,6 +22,9 @@ material = { group = "com.google.android.material", name = "material", version.r
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+refresh-footer-classics = { module = "io.github.scwang90:refresh-footer-classics", version.ref = "refreshLayoutKernel" }
+refresh-header-classics = { module = "io.github.scwang90:refresh-header-classics", version.ref = "refreshLayoutKernel" }
+refresh-layout-kernel = { module = "io.github.scwang90:refresh-layout-kernel", version.ref = "refreshLayoutKernel" }
 ui = { group = "androidx.compose.ui", name = "ui" }
 ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }

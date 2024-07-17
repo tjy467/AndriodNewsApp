@@ -69,4 +69,7 @@ dependencies {
     debugImplementation(libs.ui.test.manifest)
 
     implementation(libs.glide)
+    implementation(libs.refresh.layout.kernel)
+    implementation(libs.refresh.header.classics)
+    implementation(libs.refresh.footer.classics)
 }

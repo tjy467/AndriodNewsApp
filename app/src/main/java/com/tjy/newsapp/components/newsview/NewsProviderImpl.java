@@ -22,44 +22,35 @@ import java.util.List;
 class NewsProviderImpl {
     static final ArrayList<OnNewsUpdateListener> listeners = new ArrayList<>();
     static final HashSet<News> newsList = new HashSet<>();
-    static Date startDate = new Date(), endDate = new Date();
-    static ContinuingCrawling frontCrawling = null, backCrawling = null;
+    static ContinuingCrawling crawling = null;
 
     public static void addOnNewsUpdateListener(OnNewsUpdateListener listener) {
-        synchronized(listeners) {
-            listeners.add(listener);
-        }
+        listeners.add(listener);
     }
 
-    private static void updateNews(List<News> news, UpdateType type) {
-        synchronized(listeners) {
-            for(final OnNewsUpdateListener listener: listeners) {
-                new Handler(Looper.getMainLooper()).post(() -> listener.onNewsUpdate(news, type));
-            }
+    private static void updateNews(List<News> news) {
+        for(final OnNewsUpdateListener listener: listeners) {
+            new Handler(Looper.getMainLooper()).post(() -> listener.onNewsUpdate(news));
         }
     }
 
     // 获取最新一天的新闻并更新时间区间
-    public static synchronized void getLatestNews() {
+    public static void getLatestNews() {
         Log.i("NewsProvider", "get latest news");
-        if(frontCrawling == null || !frontCrawling.hasNext()) {
+        if(crawling == null || !crawling.hasNext()) {
             final long DAY = 24 * 60 * 60 * 1000;
             Date endDate = new Date();
-            Date startDate = new Date(endDate.getTime() - DAY);
-            if (NewsProviderImpl.endDate.before(startDate)) {
-                startDate = new Date(NewsProviderImpl.endDate.getTime());
-            }
-            frontCrawling = NewsCrawler.crawl(startDate, endDate);
+            Date startDate = new Date(endDate.getTime() - 2 * DAY);
+            crawling = NewsCrawler.crawl(startDate, endDate);
         }
         ArrayList<News> list;
         try {
-            list = frontCrawling.next();
+            list = crawling.next();
         } catch(IOException e) {
             new Handler(Looper.getMainLooper()).post(() ->
                     Toast.makeText(NewsApplication.getContext(), R.string.error_web, Toast.LENGTH_LONG).show());
             return;
         }
-        Log.i("NewsProvider", "crawling ok");
         ArrayList<News> result = new ArrayList<>();
         for(News news: list) {
             if(!newsList.contains(news)) {
@@ -67,12 +58,7 @@ class NewsProviderImpl {
                 result.add(news);
             }
         }
-        if(frontCrawling.endDate.after(NewsProviderImpl.endDate)) {
-            NewsProviderImpl.endDate = new Date(frontCrawling.endDate.getTime());
-        }
-        if(frontCrawling.startDate.before(NewsProviderImpl.startDate)) {
-            NewsProviderImpl.startDate = new Date(frontCrawling.startDate.getTime());
-        }
-        if(!result.isEmpty()) updateNews(result, UpdateType.FRONT);
+        Log.i("NewsProvider", "crawling ok, get " + result.size() + " news.");
+        if(!result.isEmpty()) updateNews(result);
     }
 }
