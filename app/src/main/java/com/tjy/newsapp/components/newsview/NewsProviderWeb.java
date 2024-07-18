@@ -1,6 +1,5 @@
 package com.tjy.newsapp.components.newsview;
 
-import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 // 获取新闻，实现部分
-public class NewsProviderWeb implements NewsProviderImpl {
+public class NewsProviderWeb implements NewsProvider {
     private OnNewsUpdateListener listener;
     private ContinuingCrawling crawling;
 

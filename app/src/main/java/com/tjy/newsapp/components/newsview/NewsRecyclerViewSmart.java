@@ -5,6 +5,9 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ViewGroup;
+import android.widget.MediaController;
+
+import androidx.media3.exoplayer.ExoPlayer;
 
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;

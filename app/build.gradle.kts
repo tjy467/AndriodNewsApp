@@ -69,8 +69,12 @@ dependencies {
     debugImplementation(libs.ui.test.manifest)
 
     implementation(libs.glide)
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
     implementation(libs.refresh.layout.kernel)
     implementation(libs.refresh.header.classics)
     implementation(libs.refresh.footer.classics)
     implementation(libs.sugar)
+    implementation("androidx.media3:media3-exoplayer:1.3.1")
+    implementation("androidx.media3:media3-ui:1.3.1")
+    implementation("androidx.media3:media3-common:1.3.1")
 }

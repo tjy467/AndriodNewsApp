@@ -10,13 +10,13 @@ import com.tjy.newsapp.components.news.News;
 
 import java.util.ArrayList;
 
-// 获取新闻，线程调度部分
+// 获取新闻，将主线程线程请求转发到网络线程
 public class NewsProviderHandler {
 
     static private HandlerThread thread = null;
-    private final NewsProviderImpl newsProvider;
+    private final NewsProvider newsProvider;
 
-    public NewsProviderHandler(NewsProviderImpl newsProvider) {
+    public NewsProviderHandler(NewsProvider newsProvider) {
         this.newsProvider = newsProvider;
     }
 

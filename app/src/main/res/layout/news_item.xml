@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ViewSwitcher
+    <com.tjy.newsapp.components.ImageVideoView
         android:id="@+id/view_switcher"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -28,14 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_title">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY" />
-    </ViewSwitcher>
+    </com.tjy.newsapp.components.ImageVideoView>
 
     <TextView
         android:id="@+id/text_publisher"

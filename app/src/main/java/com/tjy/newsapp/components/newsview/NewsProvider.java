@@ -1,8 +1,6 @@
 package com.tjy.newsapp.components.newsview;
 
-import android.content.Context;
-
-public interface NewsProviderImpl {
+public interface NewsProvider {
 
     // 设置新闻更新监听器
     void setOnNewsUpdateListener(NewsProviderHandler.OnNewsUpdateListener listener);

@@ -67,6 +67,7 @@ public class NewsCrawler {
                     + "&words="
                     + "&categories="
                     + "&page=" + page;
+            completeUrl = "https://api2.newsminer.net/svc/news/queryNewsList?size=15&startDate=2021-01-01+17%3A44%3A19&endDate=2021-12-30+17%3A44%3A19&words=%E5%85%AB%E9%83%A8%E9%97%A8%E5%8F%91%E6%96%87&categories=&page=1";
             Log.i("NewsCrawler", "crawling:" + completeUrl);
             url = new URL(completeUrl);
         } catch (MalformedURLException ignored) {}

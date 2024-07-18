@@ -68,7 +68,7 @@ public class News extends SugarRecord<News> {
     }
 
     public News setVideo(String video) {
-        this.video = extractUrl(video);
+        this.video = video.trim();
         return this;
     }
 
