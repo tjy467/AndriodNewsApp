@@ -29,22 +29,26 @@ public class NewsCrawler {
         JSONArray data = jsonObject.getJSONArray("data");
         int length = data.length();
         for(int i = 0; i < length; i++) {
-            JSONObject news = data.getJSONObject(i);
-            JSONArray organizations = news.getJSONArray("organizations");
+            JSONObject newsObject = data.getJSONObject(i);
+            JSONArray organizations = newsObject.getJSONArray("organizations");
             String organization = "";
             if(organizations.length() > 0) {
                 organization = organizations.getJSONObject(0).getString("mention");
             }
-            result.add(new News()
-                    .setTitle(news.getString("title"))
-                    .setPublishTime(news.getString("publishTime"))
-                    .setCategory(news.getString("category"))
+            String newsID = newsObject.getString("newsID");
+            News news = new News()
+                    .setTitle(newsObject.getString("title"))
+                    .setPublishTime(newsObject.getString("publishTime"))
+                    .setCategory(newsObject.getString("category"))
                     .setOrganization(organization)
-                    .setPublisher(news.getString("publisher"))
-                    .setContent(news.getString("content"))
-                    .setImage(news.getString("image"))
-                    .setVideo(news.getString("video"))
-                    .setNewsID(news.getString("newsID")));
+                    .setPublisher(newsObject.getString("publisher"))
+                    .setImage(newsObject.getString("image"))
+                    .setVideo(newsObject.getString("video"))
+                    .setNewsID(newsID);
+            NewsRecord newsRecord = new NewsRecord(newsID, newsObject.getString("content"));
+            news.save();
+            newsRecord.save();
+            result.add(news);
         }
         return result;
     }

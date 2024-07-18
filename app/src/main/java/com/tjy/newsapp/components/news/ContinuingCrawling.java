@@ -1,10 +1,17 @@
 package com.tjy.newsapp.components.news;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.Toast;
+
+import com.tjy.newsapp.NewsApplication;
+import com.tjy.newsapp.R;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-// 处理返回的新闻数量过多的情况，进行缓存
+// 暂存上次访问的参数
 public class ContinuingCrawling {
     public final Date startDate, endDate;
     private int page;
@@ -17,8 +24,15 @@ public class ContinuingCrawling {
         hasNext = true;
     }
 
-    public ArrayList<News> next() throws IOException {
-        ArrayList<News> result = NewsCrawler.crawl(startDate, endDate, page);
+    public ArrayList<News> next() {
+        ArrayList<News> result;
+        try {
+            result = NewsCrawler.crawl(startDate, endDate, page);
+        } catch(IOException e) {
+            new Handler(Looper.getMainLooper()).post(() ->
+                    Toast.makeText(NewsApplication.getContext(), R.string.error_web, Toast.LENGTH_LONG).show());
+            return new ArrayList<>();
+        }
         page++;
         if(result.size() < NewsCrawler.PAGE_SIZE) hasNext = false;
         return result;

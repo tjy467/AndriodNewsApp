@@ -3,7 +3,9 @@ package com.tjy.newsapp;
 import android.app.Application;
 import android.content.Context;
 
-public class NewsApplication extends Application {
+import com.orm.SugarApp;
+
+public class NewsApplication extends SugarApp {
     private static Context context;
 
     @Override

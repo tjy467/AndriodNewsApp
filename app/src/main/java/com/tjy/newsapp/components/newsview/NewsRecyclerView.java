@@ -49,7 +49,7 @@ public class NewsRecyclerView extends RecyclerView {
             return new NewsViewHolder(view);
         }
 
-        // 设置标题
+        // 设置新闻简略
         @Override
         public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
             News news = newsList.get(position);

@@ -72,4 +72,5 @@ dependencies {
     implementation(libs.refresh.layout.kernel)
     implementation(libs.refresh.header.classics)
     implementation(libs.refresh.footer.classics)
+    implementation(libs.sugar)
 }

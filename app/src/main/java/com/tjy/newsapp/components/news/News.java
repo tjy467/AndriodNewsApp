@@ -2,28 +2,47 @@ package com.tjy.newsapp.components.news;
 
 import android.util.Log;
 
+import com.orm.SugarRecord;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class News {
+// 新闻数据，不含正文
+public class News extends SugarRecord<News> {
     private String title;
-    private Image image;
-    private Video video;
-    private NewsContent content;
+    private String image;
+    private String video;
     private Date publishTime;
     private String organization;
     private String publisher;
     private String category;
     private String newsID;
+    private boolean hasRead;
 
-    public News() {}
+    public News() {
+        hasRead = false;
+    }
 
     @Override
     public int hashCode() {
         return newsID.hashCode();
+    }
+
+    // 从字符串中提取 url
+    private static String extractUrl(String urls) {
+        urls = urls.trim();
+        if(urls.startsWith("[") && urls.endsWith("]")) {
+            urls = urls.substring(1, urls.length() - 1);
+        }
+        String[] strings = urls.split(",");
+        for(String url: strings) {
+            if(url.isBlank()) continue;
+            return url.trim();
+        }
+        return "";
     }
 
     public String getTitle() {
@@ -35,30 +54,21 @@ public class News {
         return this;
     }
 
-    public Image getImage() {
+    public String getImage() {
         return image;
     }
 
     public News setImage(String image) {
-        this.image = new Image(image);
+        this.image = extractUrl(image);
         return this;
     }
 
-    public Video getVideo() {
+    public String getVideo() {
         return video;
     }
 
     public News setVideo(String video) {
-        this.video = new Video(video);
-        return this;
-    }
-
-    public NewsContent getContent() {
-        return content;
-    }
-
-    public News setContent(String content) {
-        this.content = new NewsContent(content);
+        this.video = extractUrl(video);
         return this;
     }
 
@@ -109,6 +119,15 @@ public class News {
 
     public News setNewsID(String newsID) {
         this.newsID = newsID;
+        return this;
+    }
+
+    public boolean hasRead() {
+        return hasRead;
+    }
+
+    public News setRead(boolean hasRead) {
+        this.hasRead = hasRead;
         return this;
     }
 }
