@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.tjy.newsapp"
+    namespace = "com.java.tanjingyu"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.tjy.newsapp"
+        applicationId = "com.java.tanjingyu"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

@@ -21,7 +21,7 @@
 
     <view
         android:id="@+id/view"
-        class="com.tjy.newsapp.components.ImageVideoView"
+        class="com.java.tanjingyu.components.ImageVideoView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
