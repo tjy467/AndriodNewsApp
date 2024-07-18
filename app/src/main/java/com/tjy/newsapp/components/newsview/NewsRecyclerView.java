@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.tjy.newsapp.R;
 import com.tjy.newsapp.components.news.News;
 
@@ -32,11 +34,21 @@ public class NewsRecyclerView extends RecyclerView {
 
     @SuppressWarnings("all")
     public class NewsViewHolder extends RecyclerView.ViewHolder {
+        public View itemView;
         public TextView textTitle;
+        public TextView textPublisher;
+        public TextView textPublishTime;
+        public TextView textOrganization;
+        public ImageView imageView;
 
         public NewsViewHolder(@NonNull View itemView) {
             super(itemView);
-            textTitle = itemView.findViewById(R.id.textTitle);
+            this.itemView = itemView;
+            textTitle = itemView.findViewById(R.id.text_title);
+            textPublisher = itemView.findViewById(R.id.text_publisher);
+            textPublishTime = itemView.findViewById(R.id.text_publish_time);
+            textOrganization = itemView.findViewById(R.id.text_organization);
+            imageView = itemView.findViewById(R.id.imageView);
         }
     }
 
@@ -54,6 +66,14 @@ public class NewsRecyclerView extends RecyclerView {
         public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
             News news = newsList.get(position);
             holder.textTitle.setText(news.getTitle());
+            holder.textPublisher.setText(news.getPublisher());
+            holder.textPublishTime.setText(news.getFormatPublishTime());
+            holder.textOrganization.setText(news.getOrganization());
+            Glide.with(holder.itemView).load(news.getImage()).into(holder.imageView);
+            holder.itemView.setOnClickListener(view -> {
+                TextView textView = view.findViewById(R.id.text_title);
+                android.util.Log.i("DEBUG!!", news.getNewsID());
+            });
         }
 
         @Override

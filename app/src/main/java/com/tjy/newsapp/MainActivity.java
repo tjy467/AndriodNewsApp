@@ -3,13 +3,14 @@ package com.tjy.newsapp;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends FragmentActivity implements BottomNavigationView.OnItemSelectedListener {
-    private Fragment currentFragment;
+    private Fragment newsFragment, categoriesFragment, mineFragment, currentFragment;
     private FragmentManager manager;
 
     @Override
@@ -41,9 +42,9 @@ public class MainActivity extends FragmentActivity implements BottomNavigationVi
 
     // 初始化菜单栏
     private void initFragments() {
-        Fragment newsFragment = new NewsFragment();
-        Fragment categoriesFragment = new CategoriesFragment();
-        Fragment mineFragment = new MineFragment();
+        newsFragment = new NewsFragment();
+        categoriesFragment = new CategoriesFragment();
+        mineFragment = new MineFragment();
         manager = this.getSupportFragmentManager();
         manager.beginTransaction()
                 .add(R.id.main_view, newsFragment, this.getString(R.string.menu_news))
@@ -57,5 +58,16 @@ public class MainActivity extends FragmentActivity implements BottomNavigationVi
 
         BottomNavigationView navigationView = findViewById(R.id.navigation);
         navigationView.setOnItemSelectedListener(this);
+    }
+
+    // 解决 Fragment 重叠的问题
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        manager.beginTransaction()
+                .remove(newsFragment)
+                .remove(categoriesFragment)
+                .remove(mineFragment)
+                .commitAllowingStateLoss();
+        super.onSaveInstanceState(outState);
     }
 }

@@ -1,5 +1,6 @@
 package com.tjy.newsapp.components.news;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;

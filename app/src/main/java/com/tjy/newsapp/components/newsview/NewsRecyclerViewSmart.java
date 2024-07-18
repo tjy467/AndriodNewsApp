@@ -6,15 +6,9 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
-import com.scwang.smart.refresh.layout.api.RefreshLayout;
-import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import com.tjy.newsapp.components.news.News;
 
 import java.util.ArrayList;
@@ -23,8 +17,8 @@ import java.util.ArrayList;
 public class NewsRecyclerViewSmart extends SmartRefreshLayout implements NewsProviderHandler.OnNewsUpdateListener {
     private final NewsRecyclerView newsRecyclerView;
 
-    public NewsRecyclerViewSmart(Context context) {
-        super(context);
+    public NewsRecyclerViewSmart(Context context, AttributeSet attrs) {
+        super(context, attrs);
         setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
@@ -38,18 +32,8 @@ public class NewsRecyclerViewSmart extends SmartRefreshLayout implements NewsPro
     // 绑定新闻来源，设置回调函数
     public void bindNewsProviderHandler(NewsProviderHandler handler) {
         handler.setOnNewsUpdateListener(this);
-        setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                handler.refreshNews();
-            }
-        });
-        setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                handler.loadMoreNews();
-            }
-        });
+        setOnRefreshListener(refreshLayout -> handler.refreshNews());
+        setOnLoadMoreListener(refreshLayout -> handler.loadMoreNews());
         handler.refreshNews();
     }
 
@@ -69,7 +53,7 @@ public class NewsRecyclerViewSmart extends SmartRefreshLayout implements NewsPro
         Log.i("NewsView", "news load more callback called with size: " + newsList.size());
         for(News news: newsList) {
             newsRecyclerView.newsList.add(news);
-            newsRecyclerView.adapter.notifyItemInserted(newsRecyclerView.adapter.getItemCount());
+            newsRecyclerView.adapter.notifyItemInserted(newsRecyclerView.adapter.getItemCount() - 1);
         }
         finishLoadMore();
     }

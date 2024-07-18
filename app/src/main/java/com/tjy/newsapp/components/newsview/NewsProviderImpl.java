@@ -1,5 +1,7 @@
 package com.tjy.newsapp.components.newsview;
 
+import android.content.Context;
+
 public interface NewsProviderImpl {
 
     // 设置新闻更新监听器

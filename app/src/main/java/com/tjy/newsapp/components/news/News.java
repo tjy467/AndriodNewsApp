@@ -76,6 +76,21 @@ public class News extends SugarRecord<News> {
         return publishTime;
     }
 
+    static private final long HOUR = 60 * 60 * 1000;
+    static private final long DAY = 24 * HOUR;
+
+    // 根据时间差返回显示的时间
+    public String getFormatPublishTime() {
+        long delta = new Date().getTime() - publishTime.getTime();
+        if(delta < DAY) {
+            int count = (int) Math.ceil((double) delta / HOUR);
+            return String.valueOf(count) + "小时前";
+        } else {
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+            return format.format(publishTime);
+        }
+    }
+
     public News setPublishTime(String publishTime) {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
         try {
