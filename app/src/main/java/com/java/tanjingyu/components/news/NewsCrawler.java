@@ -38,13 +38,14 @@ public class NewsCrawler {
             String newsID = newsObject.getString("newsID");
             News news = new News()
                     .setTitle(newsObject.getString("title"))
+                    .setContent(newsObject.getString("content"))
                     .setPublishTime(newsObject.getString("publishTime"))
                     .setCategory(newsObject.getString("category"))
                     .setOrganization(organization)
                     .setPublisher(newsObject.getString("publisher"))
                     .setImage(newsObject.getString("image"))
                     .setVideo(newsObject.getString("video"))
-                    .setNewsID(newsID);
+                    .setNewsId(newsID);
             result.add(news);
         }
         return result;

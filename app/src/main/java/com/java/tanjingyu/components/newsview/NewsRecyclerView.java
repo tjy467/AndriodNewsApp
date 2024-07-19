@@ -1,6 +1,7 @@
 package com.java.tanjingyu.components.newsview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,12 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.java.tanjingyu.NewsDetailActivity;
 import com.java.tanjingyu.R;
 import com.java.tanjingyu.components.ImageVideoView;
 import com.java.tanjingyu.components.news.News;
 
 import java.util.ArrayList;
-
 // 滚动展示新闻
 class NewsRecyclerView extends RecyclerView {
     public ArrayList<News> newsList;
@@ -63,15 +64,24 @@ class NewsRecyclerView extends RecyclerView {
         // 设置新闻简略
         @Override
         public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-            android.util.Log.d("DEBUG!!", "bind view " + position);
             News news = newsList.get(position);
             holder.textTitle.setText(news.getTitle());
             holder.textPublisher.setText(news.getPublisher());
             holder.textPublishTime.setText(news.getFormatPublishTime());
             holder.textOrganization.setText(news.getOrganization());
             holder.viewSwitcher.put(news.getImage(), news.getVideo());
+
+            // 根据是否阅读过设置颜色
+            int color = news.hasRead() ? R.color.has_read : R.color.black;
+            holder.textTitle.setTextColor(getContext().getColor(color));
             holder.itemView.setOnClickListener(view -> {
-                android.util.Log.i("DEBUG!!", news.getNewsID());
+
+                // 存储新闻到本地
+                if(!news.hasRead()) news.save();
+                holder.textTitle.setTextColor(getContext().getColor(R.color.has_read));
+                Intent intent = new Intent(getContext(), NewsDetailActivity.class);
+                intent.putExtra("newsId", news.getNewsId());
+                getContext().startActivity(intent);
             });
         }
 

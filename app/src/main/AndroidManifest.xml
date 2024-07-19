@@ -21,10 +21,7 @@
         <meta-data android:name="DATABASE" android:value="news.db" />
         <meta-data android:name="VERSION" android:value="2" />
         <meta-data android:name="QUERY_LOG" android:value="true" />
-        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.tjy.newsapp" />
-        <meta-data
-            android:name="com.bumptech.glide.module.AppGlideModule"
-            android:value="com.tjy.newsapp.AppGlideModule" />
+        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.java.tanjingyu" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

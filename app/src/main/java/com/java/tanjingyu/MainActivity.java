@@ -3,7 +3,7 @@ package com.java.tanjingyu;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -15,10 +15,24 @@ public class MainActivity extends FragmentActivity implements BottomNavigationVi
     private FragmentManager manager;
 
     @Override
-    protected void onCreate(Bundle savedInstance) {
+    protected void onCreate(@Nullable Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_main);
-        initFragments();
+        manager = this.getSupportFragmentManager();
+        BottomNavigationView navigationView = findViewById(R.id.navigation);
+        navigationView.setOnItemSelectedListener(this);
+
+        // 恢复 fragment
+        if(savedInstance != null) {
+            newsFragment = manager.findFragmentByTag(getString(R.string.menu_news));
+            categoriesFragment = manager.findFragmentByTag(getString(R.string.menu_categories));
+            mineFragment = manager.findFragmentByTag(getString(R.string.menu_mine));
+            currentFragment = manager.findFragmentByTag(savedInstance.getString("currentFragment"));
+            
+            if(currentFragment == newsFragment) navigationView.setSelectedItemId(R.id.menu_news);
+            else if(currentFragment == categoriesFragment) navigationView.setSelectedItemId(R.id.menu_categories);
+            else navigationView.setSelectedItemId(R.id.menu_mine);
+        } else initFragments();
     }
 
     // 切换菜单
@@ -46,9 +60,8 @@ public class MainActivity extends FragmentActivity implements BottomNavigationVi
         newsFragment = new NewsFragment();
         categoriesFragment = new CategoriesFragment();
         mineFragment = new MineFragment();
-        manager = this.getSupportFragmentManager();
         manager.beginTransaction()
-                .add(R.id.main_view, newsFragment, this.getString(R.string.menu_news))
+                .add(R.id.main_view, newsFragment, getString(R.string.menu_news))
                 .add(R.id.main_view, categoriesFragment, this.getString(R.string.menu_categories))
                 .add(R.id.main_view, mineFragment, this.getString(R.string.menu_mine))
                 .show(newsFragment)
@@ -56,19 +69,11 @@ public class MainActivity extends FragmentActivity implements BottomNavigationVi
                 .hide(mineFragment)
                 .commit();
         currentFragment = newsFragment;
-
-        BottomNavigationView navigationView = findViewById(R.id.navigation);
-        navigationView.setOnItemSelectedListener(this);
     }
 
-    // 解决 Fragment 重叠的问题
     @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        manager.beginTransaction()
-                .remove(newsFragment)
-                .remove(categoriesFragment)
-                .remove(mineFragment)
-                .commitAllowingStateLoss();
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString("currentFragment", currentFragment.getTag());
         super.onSaveInstanceState(outState);
     }
 }

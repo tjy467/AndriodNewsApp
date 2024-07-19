@@ -13,23 +13,16 @@ import java.util.Locale;
 // 新闻数据，不含正文
 public class News extends SugarRecord<News> {
     private String title;
+    private String content;
     private String image;
     private String video;
     private Date publishTime;
     private String organization;
     private String publisher;
     private String category;
-    private String newsID;
-    private boolean hasRead;
+    private String newsId;
 
-    public News() {
-        hasRead = false;
-    }
-
-    @Override
-    public int hashCode() {
-        return newsID.hashCode();
-    }
+    public News() {}
 
     // 从字符串中提取 url
     private static String extractUrl(String urls) {
@@ -51,6 +44,15 @@ public class News extends SugarRecord<News> {
 
     public News setTitle(String title) {
         this.title = title;
+        return this;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public News setContent(String content) {
+        this.content = content;
         return this;
     }
 
@@ -84,7 +86,7 @@ public class News extends SugarRecord<News> {
         long delta = new Date().getTime() - publishTime.getTime();
         if(delta < DAY) {
             int count = (int) Math.ceil((double) delta / HOUR);
-            return String.valueOf(count) + "小时前";
+            return count + "小时前";
         } else {
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
             return format.format(publishTime);
@@ -128,21 +130,17 @@ public class News extends SugarRecord<News> {
         return this;
     }
 
-    public String getNewsID() {
-        return newsID;
+    public String getNewsId() {
+        return newsId;
     }
 
-    public News setNewsID(String newsID) {
-        this.newsID = newsID;
+    public News setNewsId(String newsId) {
+        this.newsId = newsId;
         return this;
     }
 
     public boolean hasRead() {
-        return hasRead;
-    }
-
-    public News setRead(boolean hasRead) {
-        this.hasRead = hasRead;
-        return this;
+        long count = News.count(News.class, "news_id = ?", new String[] { newsId });
+        return count > 0;
     }
 }
