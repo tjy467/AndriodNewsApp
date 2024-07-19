@@ -5,4 +5,6 @@
     <string name="menu_categories">categories</string>
     <string name="menu_mine">mine</string>
     <string name="error_web">Failed to crawl news.</string>
+    <string name="string_source">"source: "</string>
+    <string name="string_category">"category: "</string>
 </resources>

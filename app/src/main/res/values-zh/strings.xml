@@ -6,4 +6,6 @@
     <string name="menu_categories">分类</string>
     <string name="menu_mine">我的</string>
     <string name="error_web">抓取新闻失败。</string>
+    <string name="string_source">来源：</string>
+    <string name="string_category">分类：</string>
 </resources>

@@ -74,10 +74,6 @@ public class News extends SugarRecord<News> {
         return this;
     }
 
-    public Date getPublishTime() {
-        return publishTime;
-    }
-
     static private final long HOUR = 60 * 60 * 1000;
     static private final long DAY = 24 * HOUR;
 
