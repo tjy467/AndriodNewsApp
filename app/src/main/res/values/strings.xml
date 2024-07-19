@@ -7,4 +7,5 @@
     <string name="error_web">Failed to crawl news.</string>
     <string name="string_source">"source: "</string>
     <string name="string_category">"category: "</string>
+    <string name="string_none">"none "</string>
 </resources>

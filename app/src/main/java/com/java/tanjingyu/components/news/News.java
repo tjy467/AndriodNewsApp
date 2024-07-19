@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-// 新闻数据，不含正文
+// 新闻数据，可存储在 SQLite 中
 public class News extends SugarRecord<News> {
     private String title;
     private String content;
@@ -81,7 +81,7 @@ public class News extends SugarRecord<News> {
     public String getFormatPublishTime() {
         long delta = new Date().getTime() - publishTime.getTime();
         if(delta < DAY) {
-            int count = (int) Math.ceil((double) delta / HOUR);
+            int count = (int) Math.floor((double) delta / HOUR);
             return count + "小时前";
         } else {
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);

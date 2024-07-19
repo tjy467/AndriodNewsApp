@@ -41,7 +41,9 @@ public class NewsDetailActivity extends Activity {
         TextView detailContent = findViewById(R.id.detail_content);
         detailContent.setText(news.getContent());
         TextView detailOrganization = findViewById(R.id.detail_organization);
-        detailOrganization.setText(getString(R.string.string_source) + news.getOrganization());
+        String organization = news.getOrganization();
+        if(organization.isEmpty()) organization = getString(R.string.string_none);
+        detailOrganization.setText(getString(R.string.string_source) + organization);
         TextView detailCategory = findViewById(R.id.detail_category);
         detailCategory.setText(getString(R.string.string_category) + news.getCategory());
     }

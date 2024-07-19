@@ -5,9 +5,11 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.OptIn;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Constraints;
 import androidx.media3.common.MediaItem;
+import androidx.media3.common.util.UnstableApi;
 import androidx.media3.exoplayer.ExoPlayer;
 import androidx.media3.ui.PlayerView;
 
@@ -36,6 +38,7 @@ public class ImageVideoView extends ConstraintLayout {
     }
 
     // 输入图片和视频 URL
+    @OptIn(markerClass = UnstableApi.class)
     public void put(String image, String video) {
         removeAllViewsInLayout();
         if(video.isEmpty()) {
@@ -54,12 +57,11 @@ public class ImageVideoView extends ConstraintLayout {
             player.prepare();
 
             // 设置播放器大小
-            playerView.setAspectRatioListener((targetAspectRatio, naturalAspectRatio, aspectRatioMismatch) -> {
-                playerView.setLayoutParams(new Constraints.LayoutParams(
+            playerView.setAspectRatioListener((targetAspectRatio, naturalAspectRatio, aspectRatioMismatch) ->
+                    playerView.setLayoutParams(new Constraints.LayoutParams(
                         playerView.getWidth(),
-                        (int) (playerView.getWidth() / targetAspectRatio)
-                ));
-            });
+                        (int) (playerView.getWidth() / targetAspectRatio)))
+            );
             addView(playerView);
         }
         requestLayout();
