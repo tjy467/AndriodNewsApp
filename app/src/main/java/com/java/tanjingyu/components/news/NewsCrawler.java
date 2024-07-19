@@ -2,6 +2,8 @@ package com.java.tanjingyu.components.news;
 
 import android.util.Log;
 
+import com.java.tanjingyu.components.News;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,18 +12,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 import javax.net.ssl.HttpsURLConnection;
 
 // 抓取新闻
 public class NewsCrawler {
-    public static final int PAGE_SIZE = 15;
-    private static final String QUERY_URL = "https://api2.newsminer.net/svc/news/queryNewsList";
 
     // 从网页返回的 json 文件中提取新闻内容
     private static ArrayList<News> extractNewsFromJson(JSONObject jsonObject) throws JSONException {
@@ -52,21 +47,12 @@ public class NewsCrawler {
     }
 
     // 拉取时间区间内的新闻，限定在 page 页
-    public static ArrayList<News> crawl(Date startDate, Date endDate, int page) throws IOException {
+    public static ArrayList<News> crawl(RequestForm requestForm, int page) throws IOException {
         URL url = null;
         try {
-            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
-            String startDateString = format.format(startDate);
-            String endDateString = format.format(endDate);
-            String completeUrl = QUERY_URL
-                    + "?size=" + PAGE_SIZE
-                    + "&startDate=" + URLEncoder.encode(startDateString, "UTF-8")
-                    + "&endDate=" + URLEncoder.encode(endDateString, "UTF-8")
-                    + "&words="
-                    + "&categories="
-                    + "&page=" + page;
-            Log.i("NewsCrawler", "crawling:" + completeUrl);
-            url = new URL(completeUrl);
+            String requestUrl = requestForm.getRequestUrl(page);
+            Log.i("NewsCrawler", "crawling:" + requestUrl);
+            url = new URL(requestUrl);
         } catch (MalformedURLException ignored) {}
         assert url != null;
         HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
@@ -86,7 +72,7 @@ public class NewsCrawler {
     }
 
     // 拉取时间区间内的新闻
-    public static ContinuingCrawling crawl(Date startDate, Date endDate) {
-        return new ContinuingCrawling(startDate, endDate);
+    public static ContinuingCrawling crawl(RequestForm requestForm) {
+        return new ContinuingCrawling(requestForm);
     }
 }

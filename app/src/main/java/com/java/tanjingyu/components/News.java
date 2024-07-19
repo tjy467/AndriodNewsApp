@@ -1,4 +1,4 @@
-package com.java.tanjingyu.components.news;
+package com.java.tanjingyu.components;
 
 import android.util.Log;
 

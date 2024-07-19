@@ -32,7 +32,9 @@ public class MainActivity extends FragmentActivity implements BottomNavigationVi
             if(currentFragment == newsFragment) navigationView.setSelectedItemId(R.id.menu_news);
             else if(currentFragment == categoriesFragment) navigationView.setSelectedItemId(R.id.menu_categories);
             else navigationView.setSelectedItemId(R.id.menu_mine);
-        } else initFragments();
+        } else {
+            initFragments();
+        }
     }
 
     // 切换菜单

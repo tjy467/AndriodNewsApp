@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.java.tanjingyu.NewsApplication;
 import com.java.tanjingyu.R;
+import com.java.tanjingyu.components.News;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,13 +14,12 @@ import java.util.Date;
 
 // 暂存上次访问的参数
 public class ContinuingCrawling {
-    public final Date startDate, endDate;
+    private final RequestForm requestForm;
     private int page;
     private boolean hasNext;
 
-    ContinuingCrawling(Date startDate, Date endDate) {
-        this.startDate = startDate;
-        this.endDate = endDate;
+    ContinuingCrawling(RequestForm requestForm) {
+        this.requestForm = requestForm;
         page = 1;
         hasNext = true;
     }
@@ -27,14 +27,14 @@ public class ContinuingCrawling {
     public ArrayList<News> next() {
         ArrayList<News> result;
         try {
-            result = NewsCrawler.crawl(startDate, endDate, page);
+            result = NewsCrawler.crawl(requestForm, page);
         } catch(IOException e) {
             new Handler(Looper.getMainLooper()).post(() ->
                     Toast.makeText(NewsApplication.getContext(), R.string.error_web, Toast.LENGTH_LONG).show());
             return new ArrayList<>();
         }
         page++;
-        if(result.size() < NewsCrawler.PAGE_SIZE) hasNext = false;
+        if(result.size() < RequestForm.PAGE_SIZE) hasNext = false;
         return result;
     }
 

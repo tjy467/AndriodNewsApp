@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.java.tanjingyu.components.ImageVideoView;
-import com.java.tanjingyu.components.news.News;
+import com.java.tanjingyu.components.News;
 
 import java.util.List;
 

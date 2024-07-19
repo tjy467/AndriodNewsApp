@@ -6,10 +6,11 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ViewGroup;
 
+import com.java.tanjingyu.components.news.RequestForm;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
-import com.java.tanjingyu.components.news.News;
+import com.java.tanjingyu.components.News;
 
 import java.util.ArrayList;
 
@@ -32,9 +33,9 @@ public class NewsRecyclerViewSmart extends SmartRefreshLayout implements NewsPro
     // 绑定新闻来源，设置回调函数
     public void bindNewsProviderHandler(NewsProviderHandler handler) {
         handler.setOnNewsUpdateListener(this);
-        setOnRefreshListener(refreshLayout -> handler.refreshNews());
+        setOnRefreshListener(refreshLayout -> handler.refreshNews(new RequestForm()));
         setOnLoadMoreListener(refreshLayout -> handler.loadMoreNews());
-        handler.refreshNews();
+        handler.refreshNews(new RequestForm());
     }
 
     // 下拉刷新

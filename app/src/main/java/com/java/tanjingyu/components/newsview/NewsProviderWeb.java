@@ -4,9 +4,11 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import com.java.tanjingyu.R;
 import com.java.tanjingyu.components.news.ContinuingCrawling;
-import com.java.tanjingyu.components.news.News;
+import com.java.tanjingyu.components.News;
 import com.java.tanjingyu.components.news.NewsCrawler;
+import com.java.tanjingyu.components.news.RequestForm;
 import com.java.tanjingyu.components.newsview.NewsProviderHandler.*;
 
 import java.util.ArrayList;
@@ -29,12 +31,9 @@ public class NewsProviderWeb implements NewsProvider {
 
     // 刷新最新一周的新闻
     @Override
-    public void refreshNews() {
+    public void refreshNews(RequestForm requestForm) {
         Log.i("NewsProvider", "refresh news");
-        final long WEEK = 7 * 24 * 60 * 60 * 1000;
-        Date endDate = new Date();
-        Date startDate = new Date(endDate.getTime() - WEEK);
-        crawling = NewsCrawler.crawl(startDate, endDate);
+        crawling = NewsCrawler.crawl(requestForm);
         ArrayList<News> list = crawling.next();
         Log.i("NewsProvider", "crawling ok, get " + list.size() + " news.");
         if(listener != null) {

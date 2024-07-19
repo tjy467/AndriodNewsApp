@@ -6,7 +6,8 @@ import android.os.Message;
 
 import androidx.annotation.NonNull;
 
-import com.java.tanjingyu.components.news.News;
+import com.java.tanjingyu.components.News;
+import com.java.tanjingyu.components.news.RequestForm;
 
 import java.util.ArrayList;
 
@@ -14,22 +15,12 @@ import java.util.ArrayList;
 public class NewsProviderHandler {
 
     static private HandlerThread thread = null;
-    private final NewsProvider newsProvider;
+    private final Handler handler;
 
     public NewsProviderHandler(NewsProvider newsProvider) {
-        this.newsProvider = newsProvider;
-    }
-
-    private static final int ADD_ON_NEWS_UPDATE_LISTENER = 1;
-    private static final int REFRESH_NEWS = 2;
-    private static final int LOAD_MORE_NEWS = 3;
-
-    private Handler getHandler() {
-        if(thread == null) {
-            thread = new HandlerThread("NewsProvider");
-            thread.start();
-        }
-        return new Handler(thread.getLooper()) {
+        thread = new HandlerThread("NewsProvider");
+        thread.start();
+        handler = new Handler(thread.getLooper()) {
             @Override
             public void handleMessage(@NonNull Message message) {
                 switch(message.what) {
@@ -37,7 +28,7 @@ public class NewsProviderHandler {
                         newsProvider.setOnNewsUpdateListener((OnNewsUpdateListener) message.obj);
                         break;
                     case REFRESH_NEWS:
-                        newsProvider.refreshNews();
+                        newsProvider.refreshNews((RequestForm) message.obj);
                         break;
                     case LOAD_MORE_NEWS:
                         newsProvider.loadMoreNews();
@@ -47,21 +38,26 @@ public class NewsProviderHandler {
         };
     }
 
+    private static final int ADD_ON_NEWS_UPDATE_LISTENER = 1;
+    private static final int REFRESH_NEWS = 2;
+    private static final int LOAD_MORE_NEWS = 3;
+
     public interface OnNewsUpdateListener {
         void onNewsRefresh(ArrayList<News> newsList);
         void onNewsLoadMore(ArrayList<News> newsList);
     }
 
     public void setOnNewsUpdateListener(OnNewsUpdateListener listener) {
-        Message message = getHandler().obtainMessage(ADD_ON_NEWS_UPDATE_LISTENER, listener);
-        getHandler().sendMessage(message);
+        Message message = handler.obtainMessage(ADD_ON_NEWS_UPDATE_LISTENER, listener);
+        handler.sendMessage(message);
     }
 
-    public void refreshNews() {
-        getHandler().sendEmptyMessage(REFRESH_NEWS);
+    public void refreshNews(RequestForm requestForm) {
+        Message message = handler.obtainMessage(REFRESH_NEWS, requestForm);
+        handler.sendMessage(message);
     }
 
     public void loadMoreNews() {
-        getHandler().sendEmptyMessage(LOAD_MORE_NEWS);
+        handler.sendEmptyMessage(LOAD_MORE_NEWS);
     }
 }

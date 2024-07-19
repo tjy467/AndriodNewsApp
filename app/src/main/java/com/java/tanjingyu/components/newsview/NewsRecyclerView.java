@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.java.tanjingyu.NewsDetailActivity;
 import com.java.tanjingyu.R;
 import com.java.tanjingyu.components.ImageVideoView;
-import com.java.tanjingyu.components.news.News;
+import com.java.tanjingyu.components.News;
 
 import java.util.ArrayList;
 // 滚动展示新闻
