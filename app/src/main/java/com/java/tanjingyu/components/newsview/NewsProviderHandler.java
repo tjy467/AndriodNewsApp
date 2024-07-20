@@ -13,9 +13,9 @@ import java.util.ArrayList;
 
 // 获取新闻，将主线程线程请求转发到网络线程
 public class NewsProviderHandler {
-
     static private HandlerThread thread = null;
     private final Handler handler;
+    private RequestForm requestForm;
 
     public NewsProviderHandler(NewsProvider newsProvider) {
         thread = new HandlerThread("NewsProvider");
@@ -38,6 +38,10 @@ public class NewsProviderHandler {
         };
     }
 
+    public void setRequestForm(RequestForm requestForm) {
+        this.requestForm = requestForm;
+    }
+
     private static final int ADD_ON_NEWS_UPDATE_LISTENER = 1;
     private static final int REFRESH_NEWS = 2;
     private static final int LOAD_MORE_NEWS = 3;
@@ -52,7 +56,7 @@ public class NewsProviderHandler {
         handler.sendMessage(message);
     }
 
-    public void refreshNews(RequestForm requestForm) {
+    public void refreshNews() {
         Message message = handler.obtainMessage(REFRESH_NEWS, requestForm);
         handler.sendMessage(message);
     }

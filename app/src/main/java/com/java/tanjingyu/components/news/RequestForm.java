@@ -1,5 +1,7 @@
 package com.java.tanjingyu.components.news;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,16 +16,24 @@ public class RequestForm {
     private final String startDate;
     private final String endDate;
 
+    private String encode(String str) {
+        try {
+            return URLEncoder.encode(str, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public RequestForm(String category, String keyWord, String startDate, String endDate) {
-        this.category = category;
-        this.keyWord = keyWord;
-        this.startDate = startDate;
+        this.category = category.equals("无") ? "" : category;
+        this.keyWord = encode(keyWord);
+        this.startDate = encode(startDate);
         if(endDate.isEmpty()) {
             Date now = new Date();
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
             this.endDate = format.format(now);
         } else {
-            this.endDate = endDate;
+            this.endDate = encode(endDate);
         }
     }
 
@@ -43,21 +53,5 @@ public class RequestForm {
                 + "&words=" + keyWord
                 + "&categories=" + category
                 + "&page=" + page;
-    }
-
-    public String getKeyWord() {
-        return keyWord;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public String getStartDate() {
-        return startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
     }
 }

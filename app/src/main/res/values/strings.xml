@@ -4,8 +4,14 @@
     <string name="menu_news">news</string>
     <string name="menu_categories">categories</string>
     <string name="menu_mine">mine</string>
-    <string name="error_web">Failed to crawl news.</string>
+    <string name="error_web">Failed to crawl news!</string>
     <string name="string_source">"source: "</string>
     <string name="string_category">"category: "</string>
-    <string name="string_none">"none "</string>
+    <string name="string_none">"none"</string>
+    <string name="string_search">"search"</string>
+    <string name="string_keyword">"keyword: "</string>
+    <string name="string_date_from">"date from: "</string>
+    <string name="string_to">"to:"</string>
+    <string name="button_search">"search"</string>
+    <string name="button_clear">"clear"</string>
 </resources>

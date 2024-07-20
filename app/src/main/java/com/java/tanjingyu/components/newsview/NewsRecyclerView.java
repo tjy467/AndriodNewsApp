@@ -20,8 +20,8 @@ import com.java.tanjingyu.components.News;
 import java.util.ArrayList;
 // 滚动展示新闻
 class NewsRecyclerView extends RecyclerView {
-    public ArrayList<News> newsList;
-    public NewsItemAdapter adapter;
+    ArrayList<News> newsList;
+    NewsItemAdapter adapter;
 
     public NewsRecyclerView(@NonNull Context context) {
         super(context);
@@ -33,7 +33,7 @@ class NewsRecyclerView extends RecyclerView {
     }
 
     @SuppressWarnings("all")
-    public class NewsViewHolder extends RecyclerView.ViewHolder {
+    class NewsViewHolder extends RecyclerView.ViewHolder {
         public View itemView;
         public TextView textTitle;
         public TextView textPublisher;
@@ -52,7 +52,7 @@ class NewsRecyclerView extends RecyclerView {
         }
     }
 
-    public class NewsItemAdapter extends RecyclerView.Adapter<NewsViewHolder> {
+    class NewsItemAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
         @NonNull
         @Override

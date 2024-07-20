@@ -1,10 +1,11 @@
 package com.java.tanjingyu;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.java.tanjingyu.components.ImageVideoView;
 import com.java.tanjingyu.components.News;
@@ -12,7 +13,7 @@ import com.java.tanjingyu.components.News;
 import java.util.List;
 
 // 新闻详情页面
-public class NewsDetailActivity extends Activity {
+public class NewsDetailActivity extends AppCompatActivity {
 
     // 根据 newsId 从 SQLite 中获取数据
     @Override

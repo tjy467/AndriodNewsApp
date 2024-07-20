@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="search_animation">
+        <item name="android:windowEnterAnimation">@anim/search_in</item>
+        <item name="android:windowExitAnimation">@anim/search_out</item>
+    </style>
+</resources>
