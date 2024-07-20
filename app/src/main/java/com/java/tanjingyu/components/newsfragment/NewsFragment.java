@@ -29,15 +29,12 @@ public class NewsFragment extends Fragment implements SearchBar.OnSearchClickLis
         requestForm = new RequestForm();
         providerHandler.setRequestForm(requestForm);
         recyclerView.bindNewsProviderHandler(providerHandler);
-        providerHandler.refreshNews();
+        recyclerView.autoRefresh();
 
         SearchBar searchBar = new SearchBar();
         PopupWindow window = searchBar.create(getContext(), (ViewGroup) view);
         View searchButton = view.findViewById(R.id.search_button);
-        searchButton.setOnClickListener(_view -> {
-            android.util.Log.d("DEBUG!!", "clicked");
-            window.showAtLocation(view, Gravity.TOP, 0, 0);
-        });
+        searchButton.setOnClickListener(_view -> window.showAtLocation(view, Gravity.TOP, 0, 0));
         searchBar.setOnSearchClickListener(this);
         return view;
     }

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.java.tanjingyu.NewsDetailActivity;
+import com.java.tanjingyu.components.NewsDetailActivity;
 import com.java.tanjingyu.R;
 import com.java.tanjingyu.components.ImageVideoView;
 import com.java.tanjingyu.components.News;
@@ -33,7 +33,7 @@ class NewsRecyclerView extends RecyclerView {
     }
 
     @SuppressWarnings("all")
-    class NewsViewHolder extends RecyclerView.ViewHolder {
+    static class NewsViewHolder extends RecyclerView.ViewHolder {
         public View itemView;
         public TextView textTitle;
         public TextView textPublisher;

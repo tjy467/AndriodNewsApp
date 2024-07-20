@@ -15,14 +15,23 @@ import java.util.ArrayList;
 
 // 添加上拉下拉功能
 public class NewsRecyclerViewSmart extends SmartRefreshLayout implements NewsProviderHandler.OnNewsUpdateListener {
-    private final NewsRecyclerView newsRecyclerView;
+    private NewsRecyclerView newsRecyclerView;
 
-    public NewsRecyclerViewSmart(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    public NewsRecyclerViewSmart(Context context) {
+        super(context);
         setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
         ));
+        init(context);
+    }
+
+    public NewsRecyclerViewSmart(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(context);
+    }
+
+    private void init(Context context) {
         newsRecyclerView = new NewsRecyclerView(context);
         addView(newsRecyclerView);
         setRefreshHeader(new ClassicsHeader(context));
@@ -55,5 +64,11 @@ public class NewsRecyclerViewSmart extends SmartRefreshLayout implements NewsPro
             newsRecyclerView.adapter.notifyItemInserted(newsRecyclerView.adapter.getItemCount() - 1);
         }
         finishLoadMore();
+    }
+
+    public void refreshIfEmpty() {
+        if(newsRecyclerView.newsList.isEmpty()) {
+            autoRefresh();
+        }
     }
 }
