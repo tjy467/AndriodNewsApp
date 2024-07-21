@@ -21,7 +21,7 @@ public class News extends SugarRecord<News> {
     private String publisher;
     private String category;
     private String newsId;
-    private String GLMAbstract;
+    private final String GLMAbstract;
 
     public News() {
         GLMAbstract = "";

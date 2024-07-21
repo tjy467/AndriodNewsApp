@@ -46,7 +46,7 @@ public class NewsCrawler {
         return result;
     }
 
-    // 拉取时间区间内的新闻，限定在 page 页
+    // 拉取新闻，限定在 page 页
     public static ArrayList<News> crawl(RequestForm requestForm, int page) throws IOException {
         URL url = null;
         try {

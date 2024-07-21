@@ -64,10 +64,15 @@ class GLMHelper implements Runnable {
         this.listener = listener;
     }
 
+    // 获取返回的结果
     private String extract(String json) throws JSONException {
         JSONObject jsonObject = new JSONObject(json);
         JSONArray choices = jsonObject.getJSONArray("choices");
         JSONObject choice = choices.getJSONObject(0);
+        String finishReason = choice.getString("finish_reason");
+
+        // 非正常返回
+        if(!finishReason.equals("stop")) return null;
         JSONObject message = choice.getJSONObject("message");
         String content = message.getString("content");
         return content.substring(1, content.length() - 1);

@@ -19,6 +19,7 @@ import com.java.tanjingyu.components.ImageVideoView;
 import com.java.tanjingyu.components.record.News;
 
 import java.util.ArrayList;
+
 // 滚动展示新闻
 class NewsRecyclerView extends RecyclerView {
     ArrayList<News> newsList;

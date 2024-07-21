@@ -33,7 +33,7 @@ public class ContinuingCrawling {
             return new ArrayList<>();
         }
         page++;
-        if(result.size() < RequestForm.PAGE_SIZE) hasNext = false;
+        if(result.isEmpty()) hasNext = false;
         return result;
     }
 
