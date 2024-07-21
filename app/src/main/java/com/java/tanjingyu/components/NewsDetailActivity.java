@@ -18,9 +18,11 @@ import com.java.tanjingyu.components.record.Star;
 import java.util.List;
 
 // 新闻详情页面
-public class NewsDetailActivity extends AppCompatActivity {
+public class NewsDetailActivity extends AppCompatActivity{
+    private News news;
     private AppCompatImageView imageStar;
     private boolean star;
+    private GLMHelper glmHelper;
 
     // 根据 newsId 从 SQLite 中获取数据
     @Override
@@ -31,8 +33,10 @@ public class NewsDetailActivity extends AppCompatActivity {
         String newsId = intent.getStringExtra("newsId");
         List<News> list = News.find(News.class, "news_id = ?", newsId);
         assert list.size() == 1;
-        News news = list.get(0);
-        setAttributes(news);
+        news = list.get(0);
+        setAttributes();
+        setStarButton();
+        setGLMAbstract();
     }
 
     private void setColor() {
@@ -42,7 +46,7 @@ public class NewsDetailActivity extends AppCompatActivity {
 
     // 设置相关属性
     @SuppressLint("SetTextI18n")
-    private void setAttributes(News news) {
+    private void setAttributes() {
         TextView detailTitle = findViewById(R.id.detail_title);
         detailTitle.setText(news.getTitle());
         ImageVideoView detailViewSwitcher = findViewById(R.id.detail_view_switcher);
@@ -55,11 +59,14 @@ public class NewsDetailActivity extends AppCompatActivity {
         detailContent.setText(news.getContent());
         TextView detailOrganization = findViewById(R.id.detail_organization);
         String organization = news.getOrganization();
-        if(organization.isEmpty()) organization = getString(R.string.string_none);
+        if (organization.isEmpty()) organization = getString(R.string.string_none);
         detailOrganization.setText(getString(R.string.string_source) + organization);
         TextView detailCategory = findViewById(R.id.detail_category);
         detailCategory.setText(getString(R.string.string_category) + news.getCategory());
+    }
 
+    // 收藏按钮
+    private void setStarButton() {
         FloatingActionButton button = findViewById(R.id.button_star);
         imageStar = findViewById(R.id.image_star);
         star = news.isStar();
@@ -76,5 +83,39 @@ public class NewsDetailActivity extends AppCompatActivity {
             }
             setColor();
         });
+    }
+
+    // 大模型摘要
+    @SuppressLint("SetTextI18n")
+    private void setGLMAbstract() {
+        TextView textAbstract = findViewById(R.id.detail_abstract);
+        String prefix = getString(R.string.abstract_prefix);
+        if(!news.getGLMAbstract().isEmpty()) {
+            textAbstract.setText(prefix + news.getGLMAbstract());
+            glmHelper = null;
+            return;
+        }
+        glmHelper = new GLMHelper(news);
+        glmHelper.setOnGLMOutputListener(output -> {
+            if(output == null) {
+                String abstractFailed = getString(R.string.abstract_failed);
+                Toast.makeText(this, abstractFailed, Toast.LENGTH_LONG).show();
+                textAbstract.setText(abstractFailed);
+            } else {
+
+                // 存储大模型生成的摘要
+                textAbstract.setText(prefix + output);
+                News.executeQuery("UPDATE NEWS SET glm_abstract = ? WHERE news_id = ?",
+                        output,
+                        news.getNewsId());
+            }
+        });
+        glmHelper.start();
+    }
+
+    @Override
+    public void onDestroy() {
+        if(glmHelper != null) glmHelper.stop();
+        super.onDestroy();
     }
 }

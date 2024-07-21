@@ -23,4 +23,7 @@
     <string name="string_cancel">取消</string>
     <string name="info_star">已收藏。</string>
     <string name="info_unstar">已取消收藏。</string>
+    <string name="abstract_loading">正在生成智能摘要…</string>
+    <string name="abstract_prefix">大模型智能摘要：\n</string>
+    <string name="abstract_failed">生成大模型摘要失败！</string>
 </resources>

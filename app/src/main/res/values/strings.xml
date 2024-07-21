@@ -22,4 +22,7 @@
     <string name="string_cancel">Cancel</string>
     <string name="info_star">Added to favourites.</string>
     <string name="info_unstar">Deleted from favourites</string>
+    <string name="abstract_loading">Loading intelligent abstract…</string>
+    <string name="abstract_prefix">GLM intelligent abstract:\n</string>
+    <string name="abstract_failed">Failed to generate GLM abstract.</string>
 </resources>

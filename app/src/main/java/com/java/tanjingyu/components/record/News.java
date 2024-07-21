@@ -21,8 +21,11 @@ public class News extends SugarRecord<News> {
     private String publisher;
     private String category;
     private String newsId;
+    private String GLMAbstract;
 
-    public News() {}
+    public News() {
+        GLMAbstract = "";
+    }
 
     // 从字符串中提取 url
     private static String extractUrl(String urls) {
@@ -143,5 +146,9 @@ public class News extends SugarRecord<News> {
     public News setNewsId(String newsId) {
         this.newsId = newsId;
         return this;
+    }
+
+    public String getGLMAbstract() {
+        return GLMAbstract;
     }
 }

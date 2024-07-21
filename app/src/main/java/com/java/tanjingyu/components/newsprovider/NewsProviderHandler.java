@@ -17,8 +17,10 @@ public class NewsProviderHandler {
     private RequestForm requestForm;
 
     public NewsProviderHandler(NewsProvider newsProvider) {
-        thread = new HandlerThread("NewsProvider");
-        thread.start();
+        if(thread == null) {
+            thread = new HandlerThread("NewsProvider");
+            thread.start();
+        }
         handler = new Handler(thread.getLooper()) {
             @Override
             public void handleMessage(@NonNull Message message) {
