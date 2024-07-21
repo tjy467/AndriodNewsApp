@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.java.tanjingyu.R;
+import com.java.tanjingyu.components.record.News;
 
 import java.util.List;
 

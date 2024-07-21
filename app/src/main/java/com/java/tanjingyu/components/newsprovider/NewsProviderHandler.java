@@ -1,4 +1,4 @@
-package com.java.tanjingyu.components.newsview;
+package com.java.tanjingyu.components.newsprovider;
 
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -6,12 +6,12 @@ import android.os.Message;
 
 import androidx.annotation.NonNull;
 
-import com.java.tanjingyu.components.News;
+import com.java.tanjingyu.components.record.News;
 import com.java.tanjingyu.components.news.RequestForm;
 
 import java.util.ArrayList;
 
-// 获取新闻，将主线程线程请求转发到网络线程
+// 获取新闻，将主线程请求转发到子线程
 public class NewsProviderHandler {
     static private HandlerThread thread = null;
     private final Handler handler;

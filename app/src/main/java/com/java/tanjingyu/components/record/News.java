@@ -1,4 +1,4 @@
-package com.java.tanjingyu.components;
+package com.java.tanjingyu.components.record;
 
 import android.util.Log;
 
@@ -36,6 +36,11 @@ public class News extends SugarRecord<News> {
             return url.trim();
         }
         return "";
+    }
+
+    public boolean hasRead() {
+        long count = News.count(News.class, "news_id = ?", new String[] { newsId });
+        return count > 0;
     }
 
     public String getTitle() {
@@ -133,10 +138,5 @@ public class News extends SugarRecord<News> {
     public News setNewsId(String newsId) {
         this.newsId = newsId;
         return this;
-    }
-
-    public boolean hasRead() {
-        long count = News.count(News.class, "news_id = ?", new String[] { newsId });
-        return count > 0;
     }
 }

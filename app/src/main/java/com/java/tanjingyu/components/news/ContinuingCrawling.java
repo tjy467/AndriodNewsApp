@@ -6,11 +6,10 @@ import android.widget.Toast;
 
 import com.java.tanjingyu.NewsApplication;
 import com.java.tanjingyu.R;
-import com.java.tanjingyu.components.News;
+import com.java.tanjingyu.components.record.News;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
 // 暂存上次访问的参数
 public class ContinuingCrawling {

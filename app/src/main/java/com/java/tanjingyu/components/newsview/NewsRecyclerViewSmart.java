@@ -6,10 +6,11 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ViewGroup;
 
+import com.java.tanjingyu.components.newsprovider.NewsProviderHandler;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
-import com.java.tanjingyu.components.News;
+import com.java.tanjingyu.components.record.News;
 
 import java.util.ArrayList;
 

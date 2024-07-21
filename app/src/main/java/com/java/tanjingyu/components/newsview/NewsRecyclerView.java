@@ -12,21 +12,24 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.java.tanjingyu.components.record.History;
 import com.java.tanjingyu.components.NewsDetailActivity;
 import com.java.tanjingyu.R;
 import com.java.tanjingyu.components.ImageVideoView;
-import com.java.tanjingyu.components.News;
+import com.java.tanjingyu.components.record.News;
 
 import java.util.ArrayList;
 // 滚动展示新闻
 class NewsRecyclerView extends RecyclerView {
     ArrayList<News> newsList;
     NewsItemAdapter adapter;
+    boolean enableHistory;
 
     public NewsRecyclerView(@NonNull Context context) {
         super(context);
         newsList = new ArrayList<>();
         adapter = new NewsItemAdapter();
+        enableHistory = true;
         setAdapter(adapter);
         setLayoutManager(new LinearLayoutManager(context));
         addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
@@ -78,6 +81,7 @@ class NewsRecyclerView extends RecyclerView {
 
                 // 存储新闻到本地
                 if(!news.hasRead()) news.save();
+                if(enableHistory) new History(news.getNewsId()).save();
                 holder.textTitle.setTextColor(getContext().getColor(R.color.has_read));
                 Intent intent = new Intent(getContext(), NewsDetailActivity.class);
                 intent.putExtra("newsId", news.getNewsId());

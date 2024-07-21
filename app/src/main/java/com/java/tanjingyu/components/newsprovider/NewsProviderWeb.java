@@ -1,20 +1,18 @@
-package com.java.tanjingyu.components.newsview;
+package com.java.tanjingyu.components.newsprovider;
 
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
-import com.java.tanjingyu.R;
 import com.java.tanjingyu.components.news.ContinuingCrawling;
-import com.java.tanjingyu.components.News;
+import com.java.tanjingyu.components.record.News;
 import com.java.tanjingyu.components.news.NewsCrawler;
 import com.java.tanjingyu.components.news.RequestForm;
-import com.java.tanjingyu.components.newsview.NewsProviderHandler.*;
+import com.java.tanjingyu.components.newsprovider.NewsProviderHandler.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-// 获取新闻，实现部分
+// 获取新闻，网络来源
 public class NewsProviderWeb implements NewsProvider {
     private OnNewsUpdateListener listener;
     private ContinuingCrawling crawling;

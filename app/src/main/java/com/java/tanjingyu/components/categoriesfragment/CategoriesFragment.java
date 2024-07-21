@@ -1,7 +1,6 @@
 package com.java.tanjingyu.components.categoriesfragment;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +13,8 @@ import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.java.tanjingyu.R;
 import com.java.tanjingyu.components.news.RequestForm;
-import com.java.tanjingyu.components.newsview.NewsProviderHandler;
-import com.java.tanjingyu.components.newsview.NewsProviderWeb;
+import com.java.tanjingyu.components.newsprovider.NewsProviderHandler;
+import com.java.tanjingyu.components.newsprovider.NewsProviderWeb;
 import com.java.tanjingyu.components.newsview.NewsRecyclerViewSmart;
 
 // "分类"菜单
@@ -78,9 +77,9 @@ public class CategoriesFragment extends Fragment {
     private void initDialog() {
         ChipGroup chipGroup = getChipGroup();
         dialog = new AlertDialog.Builder(getContext())
-                .setTitle(getString(R.string.string_edit_categories))
+                .setTitle(R.string.string_edit_categories)
                 .setView(chipGroup)
-                .setPositiveButton(getString(R.string.string_ok), (dialogInterface, i) -> {})
+                .setPositiveButton(R.string.string_ok, (dialogInterface, i) -> {})
                 .create();
     }
 }

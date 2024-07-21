@@ -1,8 +1,8 @@
-package com.java.tanjingyu.components.newsview;
+package com.java.tanjingyu.components.newsprovider;
 
 import com.java.tanjingyu.components.news.RequestForm;
 
-// 公用接口，有从网络加载和从存储加载两种类型
+// 公用接口
 public interface NewsProvider {
 
     // 设置新闻更新监听器

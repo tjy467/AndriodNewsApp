@@ -2,7 +2,7 @@ package com.java.tanjingyu.components.news;
 
 import android.util.Log;
 
-import com.java.tanjingyu.components.News;
+import com.java.tanjingyu.components.record.News;
 
 import org.json.JSONArray;
 import org.json.JSONException;

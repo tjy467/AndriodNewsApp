@@ -15,4 +15,9 @@
     <string name="button_clear">"clear"</string>
     <string name="string_edit_categories">Edit categories</string>
     <string name="string_ok">OK</string>
+    <string name="string_personal_center">Personal Center</string>
+    <string name="string_star">My Favourites</string>
+    <string name="string_history">History</string>
+    <string name="string_delete_record">Delete Records</string>
+    <string name="string_cancel">Cancel</string>
 </resources>
