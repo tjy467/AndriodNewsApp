@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.java.tanjingyu.components.categoriesfragment.CategoriesFragment;
+import com.java.tanjingyu.components.minefragment.MineFragment;
 import com.java.tanjingyu.components.newsfragment.NewsFragment;
 
 public class MainActivity extends FragmentActivity implements BottomNavigationView.OnItemSelectedListener {

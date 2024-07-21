@@ -1,10 +1,12 @@
 package com.java.tanjingyu;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.orm.SugarApp;
 
 public class NewsApplication extends SugarApp {
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
 
     @Override

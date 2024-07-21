@@ -1,6 +1,7 @@
 package com.java.tanjingyu.components.categoriesfragment;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +47,6 @@ public class CategoriesFragment extends Fragment {
     }
 
     // dp 转 px
-    @SuppressWarnings("all")
     private int dp2px(float dp) {
         float scale = getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
@@ -80,6 +80,7 @@ public class CategoriesFragment extends Fragment {
         dialog = new AlertDialog.Builder(getContext())
                 .setTitle(getString(R.string.string_edit_categories))
                 .setView(chipGroup)
+                .setPositiveButton(getString(R.string.string_ok), (dialogInterface, i) -> {})
                 .create();
     }
 }
