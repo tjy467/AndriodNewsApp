@@ -14,4 +14,6 @@
     <string name="string_to">到：</string>
     <string name="button_search">搜索</string>
     <string name="button_clear">清除</string>
+    <string name="string_edit_categories">编辑分类</string>
+    <string name="string_ok">确定</string>
 </resources>

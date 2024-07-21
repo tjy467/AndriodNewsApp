@@ -1,6 +1,5 @@
 package com.java.tanjingyu.components.categoriesfragment;
 
-import android.annotation.SuppressLint;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -31,6 +30,10 @@ public class ViewPagerManager {
         tabMap = new HashMap<>();
     }
 
+    public boolean isSelected(String tab) {
+        return tabs.contains(tab);
+    }
+
     public void setTabLayout(TabLayout tabLayout) {
         this.tabLayout = tabLayout;
     }
@@ -39,7 +42,6 @@ public class ViewPagerManager {
         this.viewPager = viewPager;
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     public void bindAll() {
         adapter = new Adapter();
         viewPager.setAdapter(adapter);
@@ -64,6 +66,7 @@ public class ViewPagerManager {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
+                if(tabs.isEmpty()) return;
                 String tab = tabs.get(position);
                 tabLayout.selectTab(tabMap.get(tab));
                 NewsRecyclerViewSmart view = viewMap.get(tab);
@@ -73,13 +76,31 @@ public class ViewPagerManager {
         });
     }
 
+    // 添加菜单
     public void add(String tabText, NewsRecyclerViewSmart view) {
+        viewMap.put(tabText, view);
+        enable(tabText);
+    }
+
+    // 添加类别
+    public void enable(String tabText) {
+        if(tabs.contains(tabText)) return;
         TabLayout.Tab tab = tabLayout.newTab().setText(tabText);
         tabLayout.addTab(tab);
         tabs.add(tabText);
-        viewMap.put(tabText, view);
         tabMap.put(tabText, tab);
         adapter.notifyItemInserted(adapter.getItemCount() - 1);
+    }
+
+    // 删除类别
+    public void disable(String tabText) {
+        if(!tabs.contains(tabText)) return;
+        TabLayout.Tab tab = tabMap.get(tabText);
+        assert tab != null;
+        int position = tabs.indexOf(tabText);
+        tabs.remove(position);
+        tabLayout.removeTabAt(position);
+        adapter.notifyItemRemoved(position);
     }
 
     private static class ViewHolder extends RecyclerView.ViewHolder {

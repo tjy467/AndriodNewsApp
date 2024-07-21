@@ -25,7 +25,7 @@ public class RequestForm {
     }
 
     public RequestForm(String category, String keyWord, String startDate, String endDate) {
-        this.category = category.equals("无") ? "" : category;
+        this.category = category.equals("全部") ? "" : category;
         this.keyWord = encode(keyWord);
         this.startDate = encode(startDate);
         if(endDate.isEmpty()) {

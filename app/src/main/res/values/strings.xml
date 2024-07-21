@@ -13,4 +13,6 @@
     <string name="string_to">"to:"</string>
     <string name="button_search">"search"</string>
     <string name="button_clear">"clear"</string>
+    <string name="string_edit_categories">Edit categories</string>
+    <string name="string_ok">OK</string>
 </resources>
