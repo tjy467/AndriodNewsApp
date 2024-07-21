@@ -28,7 +28,7 @@ class GLMHelper implements Runnable {
 
     private static final String API_KEY = "2c51b401005bf9721899cb1f5cefd807.ajS2MWhsA8rMtYgU";
     private static final String API_URL = "https://open.bigmodel.cn/api/paas/v4/chat/completions";
-    private static final String PROMPT = "请为下面的新闻总结摘要，不超过50字：";
+    private static final String PROMPT = "请为下面的新闻总结摘要，不超过50字：\n";
 
     public GLMHelper(News news) {
         this.news = news;
@@ -75,7 +75,10 @@ class GLMHelper implements Runnable {
         if(!finishReason.equals("stop")) return null;
         JSONObject message = choice.getJSONObject("message");
         String content = message.getString("content");
-        return content.substring(1, content.length() - 1);
+        if(content.charAt(0) == '\"') {
+            content = content.substring(1, content.length() - 1);
+        }
+        return content;
     }
 
     @Override
