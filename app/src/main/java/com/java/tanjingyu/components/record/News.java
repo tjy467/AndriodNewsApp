@@ -43,6 +43,11 @@ public class News extends SugarRecord<News> {
         return count > 0;
     }
 
+    public boolean isStar() {
+        long count = Star.count(Star.class, "news_id = ?", new String[] { newsId });
+        return count > 0;
+    }
+
     public String getTitle() {
         return title;
     }

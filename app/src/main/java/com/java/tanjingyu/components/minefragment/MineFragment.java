@@ -1,6 +1,7 @@
 package com.java.tanjingyu.components.minefragment;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,9 +24,11 @@ public class MineFragment extends Fragment {
 
         // 我的收藏
         ConstraintLayout layoutStar = view.findViewById(R.id.layout_star);
+        layoutStar.setOnClickListener(_view -> jumpActivity(Star.class.getName(), R.string.string_star));
 
         // 历史记录
         ConstraintLayout layoutHistory = view.findViewById(R.id.layout_history);
+        layoutHistory.setOnClickListener(_view -> jumpActivity(History.class.getName(), R.string.string_history));
 
         // 清除本地记录
         ConstraintLayout layoutDelete = view.findViewById(R.id.layout_delete);
@@ -41,5 +44,12 @@ public class MineFragment extends Fragment {
                 .create()
                 .show());
         return view;
+    }
+
+    private void jumpActivity(String className, int titleId) {
+        Intent intent = new Intent(getContext(), NewsRecyclerViewActivity.class);
+        intent.putExtra("className", className);
+        intent.putExtra("title", getString(titleId));
+        startActivity(intent);
     }
 }

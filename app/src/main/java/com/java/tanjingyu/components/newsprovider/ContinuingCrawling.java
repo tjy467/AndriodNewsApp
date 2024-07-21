@@ -1,4 +1,4 @@
-package com.java.tanjingyu.components.news;
+package com.java.tanjingyu.components.newsprovider;
 
 import android.os.Handler;
 import android.os.Looper;

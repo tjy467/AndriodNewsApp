@@ -7,7 +7,6 @@ import android.os.Message;
 import androidx.annotation.NonNull;
 
 import com.java.tanjingyu.components.record.News;
-import com.java.tanjingyu.components.news.RequestForm;
 
 import java.util.ArrayList;
 

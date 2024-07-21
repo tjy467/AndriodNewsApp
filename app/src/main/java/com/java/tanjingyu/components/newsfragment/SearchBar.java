@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.java.tanjingyu.R;
-import com.java.tanjingyu.components.news.RequestForm;
+import com.java.tanjingyu.components.newsprovider.RequestForm;
 
 // 弹出的搜索栏
 public class SearchBar {

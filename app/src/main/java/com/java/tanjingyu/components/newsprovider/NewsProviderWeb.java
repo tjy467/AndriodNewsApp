@@ -4,27 +4,17 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
-import com.java.tanjingyu.components.news.ContinuingCrawling;
 import com.java.tanjingyu.components.record.News;
-import com.java.tanjingyu.components.news.NewsCrawler;
-import com.java.tanjingyu.components.news.RequestForm;
-import com.java.tanjingyu.components.newsprovider.NewsProviderHandler.*;
 
 import java.util.ArrayList;
 
 // 获取新闻，网络来源
-public class NewsProviderWeb implements NewsProvider {
-    private OnNewsUpdateListener listener;
+public class NewsProviderWeb extends NewsProvider {
     private ContinuingCrawling crawling;
 
     public NewsProviderWeb() {
         listener = null;
         crawling = null;
-    }
-
-    @Override
-    public void setOnNewsUpdateListener(OnNewsUpdateListener listener) {
-        this.listener = listener;
     }
 
     // 刷新最新一周的新闻

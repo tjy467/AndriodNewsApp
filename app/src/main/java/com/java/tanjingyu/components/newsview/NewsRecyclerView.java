@@ -23,13 +23,11 @@ import java.util.ArrayList;
 class NewsRecyclerView extends RecyclerView {
     ArrayList<News> newsList;
     NewsItemAdapter adapter;
-    boolean enableHistory;
 
     public NewsRecyclerView(@NonNull Context context) {
         super(context);
         newsList = new ArrayList<>();
         adapter = new NewsItemAdapter();
-        enableHistory = true;
         setAdapter(adapter);
         setLayoutManager(new LinearLayoutManager(context));
         addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
@@ -81,7 +79,8 @@ class NewsRecyclerView extends RecyclerView {
 
                 // 存储新闻到本地
                 if(!news.hasRead()) news.save();
-                if(enableHistory) new History(news.getNewsId()).save();
+                History.deleteAll(History.class, "news_id = ?", news.getNewsId());
+                new History(news.getNewsId()).save();
                 holder.textTitle.setTextColor(getContext().getColor(R.color.has_read));
                 Intent intent = new Intent(getContext(), NewsDetailActivity.class);
                 intent.putExtra("newsId", news.getNewsId());

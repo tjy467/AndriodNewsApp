@@ -1,4 +1,4 @@
-package com.java.tanjingyu.components.news;
+package com.java.tanjingyu.components.newsprovider;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

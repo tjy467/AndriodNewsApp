@@ -21,4 +21,6 @@
     <string name="string_history">历史记录</string>
     <string name="string_delete_record">删除本地记录</string>
     <string name="string_cancel">取消</string>
+    <string name="info_star">已收藏。</string>
+    <string name="info_unstar">已取消收藏。</string>
 </resources>

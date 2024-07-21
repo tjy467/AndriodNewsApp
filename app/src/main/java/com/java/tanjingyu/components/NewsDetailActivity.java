@@ -2,18 +2,25 @@ package com.java.tanjingyu.components;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.java.tanjingyu.R;
 import com.java.tanjingyu.components.record.News;
+import com.java.tanjingyu.components.record.Star;
 
 import java.util.List;
 
 // 新闻详情页面
 public class NewsDetailActivity extends AppCompatActivity {
+    private AppCompatImageView imageStar;
+    private boolean star;
 
     // 根据 newsId 从 SQLite 中获取数据
     @Override
@@ -26,6 +33,11 @@ public class NewsDetailActivity extends AppCompatActivity {
         assert list.size() == 1;
         News news = list.get(0);
         setAttributes(news);
+    }
+
+    private void setColor() {
+        int color = getColor(star ? R.color.yellow : R.color.white);
+        imageStar.setImageTintList(ColorStateList.valueOf(color));
     }
 
     // 设置相关属性
@@ -47,5 +59,22 @@ public class NewsDetailActivity extends AppCompatActivity {
         detailOrganization.setText(getString(R.string.string_source) + organization);
         TextView detailCategory = findViewById(R.id.detail_category);
         detailCategory.setText(getString(R.string.string_category) + news.getCategory());
+
+        FloatingActionButton button = findViewById(R.id.button_star);
+        imageStar = findViewById(R.id.image_star);
+        star = news.isStar();
+        setColor();
+        String newsId = news.getNewsId();
+        button.setOnClickListener(view -> {
+            star = !star;
+            if(star) {
+                new Star(newsId).save();
+                Toast.makeText(this, getString(R.string.info_star), Toast.LENGTH_SHORT).show();
+            } else {
+                Star.deleteAll(Star.class, "news_id = ?", newsId);
+                Toast.makeText(this, getString(R.string.info_unstar), Toast.LENGTH_SHORT).show();
+            }
+            setColor();
+        });
     }
 }

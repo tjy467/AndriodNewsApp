@@ -10,7 +10,7 @@ import android.widget.PopupWindow;
 import androidx.fragment.app.Fragment;
 
 import com.java.tanjingyu.R;
-import com.java.tanjingyu.components.news.RequestForm;
+import com.java.tanjingyu.components.newsprovider.RequestForm;
 import com.java.tanjingyu.components.newsprovider.NewsProviderHandler;
 import com.java.tanjingyu.components.newsprovider.NewsProviderWeb;
 import com.java.tanjingyu.components.newsview.NewsRecyclerViewSmart;

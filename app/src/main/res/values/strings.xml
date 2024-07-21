@@ -20,4 +20,6 @@
     <string name="string_history">History</string>
     <string name="string_delete_record">Delete Records</string>
     <string name="string_cancel">Cancel</string>
+    <string name="info_star">Added to favourites.</string>
+    <string name="info_unstar">Deleted from favourites</string>
 </resources>

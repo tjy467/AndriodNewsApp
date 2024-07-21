@@ -37,6 +37,11 @@
             android:exported="false"
             android:theme="@style/Theme.NewsApp">
         </activity>
+        <activity
+            android:name=".components.minefragment.NewsRecyclerViewActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NewsApp">
+        </activity>
     </application>
 
 </manifest>

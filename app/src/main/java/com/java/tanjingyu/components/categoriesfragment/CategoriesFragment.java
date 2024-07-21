@@ -12,7 +12,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.java.tanjingyu.R;
-import com.java.tanjingyu.components.news.RequestForm;
+import com.java.tanjingyu.components.newsprovider.RequestForm;
 import com.java.tanjingyu.components.newsprovider.NewsProviderHandler;
 import com.java.tanjingyu.components.newsprovider.NewsProviderWeb;
 import com.java.tanjingyu.components.newsview.NewsRecyclerViewSmart;
